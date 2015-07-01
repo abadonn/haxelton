@@ -1,3 +1,4 @@
+import json
 from django.views.generic import View
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
@@ -21,13 +22,25 @@ class GetMyPlaylist(View):
             client_secret='44c1678fb4320d6f765ec1e92068a3c2',
             username='newsicclient',
             password='thisisnewsic')
-        """
         result = client.get('/me/tracks')
-        track = client.get('/tracks/212801333')
-        stream_url = client.get(track.stream_url, allow_redirects=False)
-        print(stream_url.location)
+        playlist = []
+        for track in result:
+            if self._is_valid_track(track) is not True:
+                continue
+            final_track = {
+                "title": track.title,
+                "description": track.description,
+                "link": client.get(track.stream_url, allow_redirects=False).location
+            }
+            playlist.append(final_track)
 
-        return HttpResponse(result.raw_data)
         """
+        user_id = request.user.id
+        preferences = UserPreference.objects.all().filter(user__id=user_id)
 
-        return "oh yeah"
+        print(preferences)
+        """
+        return HttpResponse(json.dumps(playlist), content_type="application/json")
+
+    def _is_valid_track(self, track):
+        return True
