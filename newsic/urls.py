@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from .player.views import Player
 from .accounts.views import Register, Login
+from .news.views import TopicList
 
 urlpatterns = [
+    url(r'^api/topiclist', TopicList.as_view()),
     url(r'^login$', Login.as_view()),
     url(r'^register$', Register.as_view()),
     url(r'', Player.as_view()),
