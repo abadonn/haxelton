@@ -4,9 +4,19 @@ import django
 django.setup()
 
 from newsic.news.models import Publisher, Topic
+from django.contrib.auth.models import User
+from newsic.accounts.models import UserPreference
 Publisher.objects.all().delete()
 Topic.objects.all().delete()
+UserPreference.objects.all().delete()
+User.objects.all().delete()
 
+
+user = User.objects.create_user('newsic', 'newsic@whateverthismightbe.com', 'newsic')
+preference = UserPreference(topic="Politic", publisher="Bild", user=user)
+preference.save()
+preference = UserPreference(topic="Computers", publisher="Computer_Bild", user=user)
+preference.save()
 
 pub_welt = Publisher(name="Die Welt")
 pub_welt.save()

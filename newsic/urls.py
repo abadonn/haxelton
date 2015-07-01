@@ -13,14 +13,19 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
-from .player.views import Player
-from .accounts.views import Register, Login
+from django.conf.urls import url
+from .player.views import player, GetMyPlaylist
+from .accounts.views import Register, Login, LogMeIn, LogMeOut, Profile
 from .news.views import TopicList
+
 
 urlpatterns = [
     url(r'^api/topiclist', TopicList.as_view()),
+    url(r'^api/login', LogMeIn.as_view()),
+    url(r'^api/logout', LogMeOut.as_view()),
+    url(r'^api/playlist', GetMyPlaylist.as_view()),
     url(r'^login$', Login.as_view()),
     url(r'^register$', Register.as_view()),
-    url(r'', Player.as_view()),
+    url(r'^profile$', Profile.as_view()),
+    url(r'', player),
 ]
