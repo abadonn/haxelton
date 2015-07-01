@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="hidden" name="next" value="/" />
-                        <input type="submit" value="Register" class="btn btn-default" />
+                        <input type="submit" value="Register" class="btn btn-default" style="width:120px;" />
                     </div>
                 </div>
                 {% if form.errors %}
@@ -43,8 +43,10 @@
     <div class="col-md-12">
           <p class="fancy"><span>OR</span></p>
         <section id="socialLoginForm">
-            <button class="btn btn-default">Facebook</button>
-            <button class="btn btn-default">Google</button>
+            <div class="col-md-8 col-md-push-2" style="padding-left:0;">
+                <button class="btn btn-default" style="width:120px;">Facebook</button><br /><br />
+                <button class="btn btn-default" style="width:120px;">Google</button>
+                </div>
         </section>
     </div>
 </div>
