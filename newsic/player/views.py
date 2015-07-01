@@ -1,3 +1,5 @@
+from datetime import datetime
+from datetime import timedelta
 import json
 from django.views.generic import View
 from django.shortcuts import render_to_response
@@ -22,10 +24,16 @@ class GetMyPlaylist(View):
             client_secret='44c1678fb4320d6f765ec1e92068a3c2',
             username='newsicclient',
             password='thisisnewsic')
-        result = client.get('/me/tracks')
+        yesterday = datetime.now() - timedelta(days=1)
+        result = client.get('/me/tracks', created_at={
+            'from': "{0}-{1}-{2} 00:00:00".format(yesterday.year,
+                                                  yesterday.month,
+                                                  yesterday.day) })
+        user_id = request.user.id
+        preferences = UserPreference.objects.all().filter(user__id=user_id)
         playlist = []
         for track in result:
-            if self._is_valid_track(track) is not True:
+            if self._is_valid_track(track, preferences) is not True:
                 continue
             final_track = {
                 "title": track.title,
@@ -34,13 +42,14 @@ class GetMyPlaylist(View):
             }
             playlist.append(final_track)
 
-        """
-        user_id = request.user.id
-        preferences = UserPreference.objects.all().filter(user__id=user_id)
-
-        print(preferences)
-        """
         return HttpResponse(json.dumps(playlist), content_type="application/json")
 
-    def _is_valid_track(self, track):
-        return True
+    def _is_valid_track(self, track, preferences):
+
+        for preference in preferences:
+            publisher = "#{0}".format(preference.publisher)
+            topic = "#{0}".format(preference.topic)
+
+            if publisher in track.description and topic in track.description:
+                return True
+        return False
