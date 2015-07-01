@@ -2,8 +2,25 @@
 <html>
 <head>
     <title>Newsic</title>
-    </head>
-<body>
-{% block content %}{% endblock content %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/content/site.css" />
+    <script src="static/scripts/modernizr-2.6.2.js"></script>
+</head>    
+<body ng-app="NewsicApp">
+    <div class="container body-content">
+        {% block content %}{% endblock content %}
+        <hr/>
+        <footer>
+            <p>&copy; 2015 Newsic</p>
+        </footer>
+    </div>
+
+<script src="static/scripts/jquery-1.10.2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+<script src="static/scripts/bootstrap.min.js"></script>
+<script src="static/scripts/site.js"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>

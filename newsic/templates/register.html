@@ -1,4 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-this is registration page
+
+<div class="row">
+    <div class="col-md-12">
+        <section id="loginForm">
+            <form action="." method="post" class="form-horizontal">
+                {% csrf_token %}
+                <h4>Register a local account</h4>
+                <hr />
+                <div class="form-group">
+                    <label for="username" class="col-md-2 control-label">User name</label>
+                    <div class="col-md-10">
+                        <input name="username" type="text" class="form-control" placeholder="Username" />
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="email" class="col-md-2 control-label">Email</label>
+                    <div class="col-md-10">
+                        <input name="email" type="email" class="form-control" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-md-2 control-label">Password</label>
+                    <div class="col-md-10">
+                        <input type="password" name="password" class="form-control" placeholder="Password" />
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="password2" class="col-md-2 control-label">Confirm Password</label>
+                    <div class="col-md-10">
+                        <input type="password" name="password2" class="form-control" placeholder="Confirm Password" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="hidden" name="next" value="/" />
+                        <input type="submit" value="Register" class="btn btn-default" />
+                    </div>
+                </div>
+                {% if form.errors %}
+                <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+    <div class="col-md-12">
+          <p class="fancy"><span>OR</span></p>
+        <section id="socialLoginForm">
+            <button class="btn btn-default">Facebook</button>
+            <button class="btn btn-default">Google</button>
+        </section>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    {% load staticfiles %}
+	<script src="static/scripts/jquery.validate.min.js"></script>
+
 {% endblock %}
