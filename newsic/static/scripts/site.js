@@ -52,8 +52,57 @@ app.controller("profileController", function($scope, $http){
 	};
 });
 
-app.controller("playerController", function($scope, $http){
-	$scope.soundcloudUrl = "https://soundcloud.com/octobersveryown/remyboyz-my-way-rmx-ft-drake";
+app.controller("playerController", function($scope, $http, $sce){
+	$http.get('api/playlist').then(function(result){
+		$scope.data = result.data;
+		$scope.soundcloudUrl = $scope.data[0].link;
+		setupPlayer($scope.soundcloudUrl);
+	});
+
+	$scope.isPlaying = false;
+	
+	$scope.trustSrc = function() {
+    	return $sce.trustAsResourceUrl($scope.soundcloudUrl);
+  	};
+	  
+	function setupPlayer(url){
+		angular.element("#jquery_jplayer_1").jPlayer({
+			volume: 0.8,
+			 muted: false,
+			 backgroundColor: '#000000',
+			 cssSelectorAncestor: '#jp_container_1',
+			 cssSelector: {
+			  play: '.jp-play',
+			  pause: '.jp-pause',
+			  stop: '.jp-stop',
+			  next: '.jp-next',
+			  prev: '.jp-prev',
+			  seekBar: '.jp-seek-bar',
+			  playBar: '.jp-play-bar',
+			  mute: '.jp-mute',
+			  unmute: '.jp-unmute',
+			  volumeBar: '.jp-volume-bar',
+			  volumeBarValue: '.jp-volume-bar-value',
+			  volumeMax: '.jp-volume-max',
+			  playbackRateBar: '.jp-playback-rate-bar',
+			  playbackRateBarValue: '.jp-playback-rate-bar-value',
+			  currentTime: '.jp-current-time',
+			  duration: '.jp-duration',
+			  title: '.jp-title',
+			  gui: '.jp-gui',
+			  remainingDuration: true,
+        	  toggleDuration: true
+			 },
+			 errorAlerts: false,
+			 warningAlerts: false,
+		   ready: function () {
+		    angular.element(this).jPlayer("setMedia", {
+		     mp3: url,
+		    });
+		   },
+		   supplied: "mp3"
+		  });
+	} 
 });
 
 app.controller("userController", function($scope, $window, $location){
@@ -71,6 +120,9 @@ app.controller("userController", function($scope, $window, $location){
 	
 	$scope.login = function(){
 		var redirectToUrl = getParameterByName("next");
+		if(redirectToUrl === "")
+			redirectToUrl = "/profile";
+			
 		$window.location.href = url.replace("{0}", $scope.username).replace("{1}", $scope.password).replace("{2}", redirectToUrl);
 	};
 });

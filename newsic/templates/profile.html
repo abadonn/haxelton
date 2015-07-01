@@ -4,40 +4,40 @@
 <div class="row" ng-controller="profileController">
     <div class="col-md-12">
         <section id="categoryForm">
-            <h4>Create your own news profile</h4>
-            <hr />
 			<div id="carousel-categories" class="carousel slide" data-ride="carousel" data-interval="false">
 				<div class="carousel-inner" role="listbox">
 				    <div class="item active">
 				      <div class="carousel-caption">
-				        <h3>Intro</h3>
-						<p>Here you can create your own news channel. 
+						<div class="cat-header">Intro</div>
+						<p class="content-box" style="margin-top: 40px;">Create your own news channel.
 						We will show you some categories and you only have to click the heart if you like the topic or not.
 						</p>
 						<footer>
-							<button type="button" class="btn btn-defaut glyphicon glyphicon-arrow-right" ng-click="next()"></button>
+							<button type="button" class="btn btn-warning glyphicon glyphicon-arrow-right" ng-click="next()"></button>
 						</footer>
 				      </div>
 				    </div>
 				    <div class="item" ng-repeat="(key,value) in categories">
 				      <div class="carousel-caption">
-						  <h3>{[{key}]}</h3>
-						  <p>Some text for this category?</p>
+						  <div class="cat-header">{[{key}]}</div>
 						  <footer>
-							<button type="button" class="btn btn-defaut glyphicon glyphicon-remove" ng-click="like(key, false)" ></button>
-							<button type="button" class="btn btn-defaut glyphicon glyphicon-heart" ng-click="like(key, true)"></button>
+							  <span class="content-box">not interested</span>
+							<button type="button" class="btn btn-warning glyphicon glyphicon-remove gutter" ng-click="like(key, false)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></button>
+							<span class="content-box">interested</span>
+							<button type="button" class="btn btn-warning glyphicon glyphicon-heart" ng-click="like(key, true)"></button>
 						</footer>
 				      </div>
 				    </div>
 					<div class="item">
-				      <div class="carousel-caption">
+				      <div class="carousel-caption summary">
 						  <h3>Choose your favourite newspaper and magazines</h3>
 						  <div ng-repeat="cat in catsILike">
 							  <h3>{[{cat}]}</h3>
+							  <div class="cat-header">{[{key}]}</div>
 							  <ul><li class="btn btn-default" data-toggle="button" ng-repeat="name in categories[cat]" ng-click="select(cat, name)">{[{name}]}</li></ul>
 						  </div>
 						  <footer>
-							<button type="button" class="btn btn-defaut glyphicon glyphicon-ok" ng-click="complete()"></button>
+							<button type="button" class="btn btn-warning glyphicon glyphicon-ok" ng-click="complete()"></button>
 						</footer>
 				      </div>
 				    </div>
