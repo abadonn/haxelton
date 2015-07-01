@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='newzbuzz',
+    name='newsic',
     version='1.0.0',
     description='Our project',
     author='HaxelthonNewbies',
