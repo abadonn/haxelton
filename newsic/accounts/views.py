@@ -1,7 +1,7 @@
 import json
 from django.views.generic import View
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -16,6 +16,7 @@ class LogMeIn(View):
         response = user is not None and user.is_active
         if response:
             login(request, user)
+            return HttpResponseRedirect(request.GET.get("next", "/"))
         return HttpResponse(json.dumps(response), content_type="application/json")
 
 class LogMeOut(View):
