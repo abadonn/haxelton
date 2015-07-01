@@ -34,8 +34,9 @@
     <div class="col-md-12">
           <p class="fancy"><span>OR</span></p>
         <section id="socialLoginForm">
-            <button class="btn btn-default">Facebook</button>
-            <button class="btn btn-default">Google</button>
+            <button class="btn btn-default"><a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+            </button>
+            <button class="btn btn-default"><a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a></button>
         </section>
     </div>
 </div>

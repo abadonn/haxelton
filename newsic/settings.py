@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
     'newsic',
     'newsic.accounts',
     'newsic.news',
@@ -56,6 +57,17 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'newsic.urls'
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -70,6 +82,27 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, "newsic", "templates"),
 )
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL = '/login/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '869767796431736'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'bb91fe62d955f86aac1566013fa19a22'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '634105403520-ei5t7r77fvgqo4gqdchskper52jrb55a.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'k4hIadYC3PUTqdUe8-wMuz7_'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/plus.me'
+]
 
 WSGI_APPLICATION = 'newsic.wsgi.application'
 

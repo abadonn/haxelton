@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from ..accounts.models import UserPreference
 
-
 import soundcloud
 
 # Create your views here.

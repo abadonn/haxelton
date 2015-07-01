@@ -22,7 +22,7 @@ class LogMeIn(View):
 class LogMeOut(View):
     def get(self, request):
         logout(request)
-
+        return HttpResponseRedirect("/")
 
 class Register(View):
     def get(self, request):
