@@ -1,9 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="row" ng-controller="playerController">
+<div class="row" ng-controller="playerController" style="height:650px;">
+    <img src="static/images/logo_newsic_250x91px.png" width="250" height="91" class="logo-small" />
+    <div class="clearfix"></div>
     <div class="col-md-12">
-        <iframe id="sc-widget" src="https://w.soundcloud.com/player/?url={[{soundcloudUrl}]}" width="100%" height="465" scrolling="no" frameborder="no"></iframe>
+        <div class="content-box">Your Newsic Channel:</div>
+       <div style="text-align:center;"> 
+            <div>
+               <!--<div class="getty embed image" style="position: absolute;background-color:#fff;display:inline-block;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#a7a7a7;font-size:11px;width:100%;max-width:594px;"><div style="overflow:hidden;position:relative;height:0;padding:66.666667% 0 0 0;width:100%;"><iframe src="//embed.gettyimages.com/embed/479128932?et=dwizS830QTBwvvzfRBMpwA&viewMoreLink=off&sig=-_Lq5FtjKLHn1uD4TzTecWtd0kEDdWlDX5XVX1SIqW8=" width="594" height="396" scrolling="no" frameborder="0" style="display:inline-block;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><p style="margin:0;"></p><div style="padding:0;margin:0 0 0 10px;text-align:left;"><a href="http://www.gettyimages.com/detail/479128932" target="_blank" style="color:#a7a7a7;text-decoration:none;font-weight:normal !important;border:none;display:inline-block;">View image</a> | <a href="http://www.gettyimages.com" target="_blank" style="color:#a7a7a7;text-decoration:none;font-weight:normal !important;border:none;display:inline-block;">gettyimages.com</a></div></div>-->
+            </div>
+            <div style="margin-top:50px;">
+            <span style="font-size:2em;font-weight:bold;">{[{title}]}</span>
+            <div id="jquery_jplayer_1"></div>
+            <div id="jp_container_1">
+                <div class="jp-gui jp-interface">
+                    <div class="jp-controls">
+                        <a class="jp-prev glyphicon glyphicon-backward" style="display:none;"></a>
+                      <a class="jp-play glyphicon glyphicon-play"></a>
+                      <a class="jp-pause glyphicon glyphicon-pause" style="display:none;"></a>
+                      <a class="jp-next glyphicon glyphicon-forward" style="display:none;"></a>
+                    </div>
+                    <div class="jp-progress">
+                      <div class="jp-seek-bar">
+                        <div class="jp-play-bar"></div>
+                      </div>
+                    </div>
+                    <span class="jp-current-time" role="timer" aria-label="time">&nbsp;</span> - 
+                    <span class="jp-duration" role="timer" aria-label="duration">&nbsp;</span>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -11,27 +39,6 @@
 {% block scripts %}
 
     {% load staticfiles %}
-<script src="https://w.soundcloud.com/player/api.js"></script>
-<script>
-    (function(){
-    var widgetIframe = document.getElementById('sc-widget'),
-        widget       = SC.Widget(widgetIframe);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
 
-    widget.bind(SC.Widget.Events.READY, function() {
-      widget.bind(SC.Widget.Events.PLAY, function() {
-        // get information about currently playing sound
-        widget.getCurrentSound(function(currentSound) {
-          console.log('sound ' + currentSound.get('') + 'began to play');
-        });
-      });
-      // get current level of volume
-      widget.getVolume(function(volume) {
-        console.log('current volume value is ' + volume);
-      });
-      // set new volume level
-      widget.setVolume(50);
-      // get the value of the current position
-    });
-  }());
-</script>
 {% endblock %}

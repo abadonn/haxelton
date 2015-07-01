@@ -1,6 +1,7 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+    background-color: #35312A;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -51,7 +52,8 @@ input[type="checkbox"].input-validation-error {
 .fancy span {
   display: inline-block;
   position: relative;
-  background-color: white;
+  background-color: transparent;
+  font-size: 2em;
   padding:5px;
   top:-5px;  
 }
@@ -68,4 +70,117 @@ input[type="checkbox"].input-validation-error {
 .carousel-caption {
   color: black;
   position: initial;
+}
+
+.container {
+  width: 640px;
+}
+
+.container {
+  background-image: url('../images/bg_image_welcome.png');
+  background-color: black;
+  background-size: auto 100%; /* width and height, can be %, px or whatever. */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#categoryForm .item {
+  height:650px;
+}
+
+#categoryForm .item .content-box, .content-box {
+  color: white;
+  background-color:black;
+  opacity: 0.8;
+  font-size: 1.4em;
+  padding:10px;
+}
+
+.btn-warning {
+  background-color: #edb800;
+  font-size: 1.8em;
+  width:120px;
+  height:40px;
+}
+
+.carousel-caption {
+  padding-top:20%;
+}
+
+.carousel-caption.summary {
+  padding-top:20px;
+  height:650px;
+  overflow-y:auto;
+}
+
+.carousel-caption > footer {
+  margin-top:100px;
+}
+
+.carousel-caption > footer > div {
+  display: inline-block;
+}
+
+.carousel-caption > footer > div > .btn {
+  margin-top:20px;
+}
+
+.carousel-caption > footer > .gutter {
+  margin-right:50px;
+}
+
+.cat-header {
+  display: inline-block;
+  background-color: black;
+  opacity: 0.6;
+  color: white;
+  line-height: 3em;
+  padding: 0 50px;
+  font-size:1.5em;
+  font-weight: bold;
+}
+
+#jp_container_1 {
+  width: 200px;
+  display: inline-block;
+  text-align: center;
+}
+
+.jp-progress {
+  margin-top:20px;
+  height: 10px;
+}
+
+.jp-seek-bar {
+  background-color: black;
+}
+
+.jp-seek-bar, .jp-play-bar{
+  height: 100%;
+}
+
+.jp-play-bar {
+  background-color: #edb800;
+}
+
+.jp-play, .jp-pause {
+  width:70px;
+  height:70px;
+  border: #edb800 3px solid;
+  border-radius: 35px;
+  text-align: center;
+  line-height: 60px;
+  vertical-align: middle;
+  color: #edb800;
+  font-size: 2em;
+}
+
+.jp-play:hover, .jp-pause:hover {
+  color: #edb800;
+  text-decoration: none;
+}
+
+.logo-big, .logo-small {
+ margin-top:20px;
+ float:right; 
 }

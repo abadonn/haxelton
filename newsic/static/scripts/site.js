@@ -6,7 +6,7 @@ app.config(function($interpolateProvider) {
   $interpolateProvider.endSymbol('}]}');
 });
 
-app.controller("profileController", function($scope, $http){
+app.controller("profileController", function($scope, $http, $window){
 	$scope.currentSlide = 0;
 	
 	$scope.categories = [];
@@ -48,18 +48,68 @@ app.controller("profileController", function($scope, $http){
 	};
 	
 	$scope.complete = function(){
-		$http.post('api/saveProfile', {data: $scope.catsAndSubs});
+		$http.post('api/saveProfile', {data: $scope.catsAndSubs}).then(function(){
+			$window.location.href = "/player";
+		}, function(){$window.location.href = "/player";});
 	};
 });
 
-app.controller("playerController", function($scope, $http){
-	$scope.soundcloudUrl = "https://soundcloud.com/octobersveryown/remyboyz-my-way-rmx-ft-drake";
+app.controller("playerController", function($scope, $http, $sce){
+	$http.get('api/playlist').then(function(result){
+		$scope.data = result.data;
+		$scope.soundcloudUrl = $scope.data[0].link;
+		$scope.title = $scope.data[0].title;
+		setupPlayer($scope.soundcloudUrl);
+	});
+
+	$scope.trustSrc = function() {
+    	return $sce.trustAsResourceUrl($scope.soundcloudUrl);
+  	};
+	  
+	function setupPlayer(url){
+		angular.element("#jquery_jplayer_1").jPlayer({
+			volume: 0.8,
+			 muted: false,
+			 backgroundColor: '#000000',
+			 cssSelectorAncestor: '#jp_container_1',
+			 cssSelector: {
+			  play: '.jp-play',
+			  pause: '.jp-pause',
+			  stop: '.jp-stop',
+			  next: '.jp-next',
+			  prev: '.jp-prev',
+			  seekBar: '.jp-seek-bar',
+			  playBar: '.jp-play-bar',
+			  mute: '.jp-mute',
+			  unmute: '.jp-unmute',
+			  volumeBar: '.jp-volume-bar',
+			  volumeBarValue: '.jp-volume-bar-value',
+			  volumeMax: '.jp-volume-max',
+			  playbackRateBar: '.jp-playback-rate-bar',
+			  playbackRateBarValue: '.jp-playback-rate-bar-value',
+			  currentTime: '.jp-current-time',
+			  duration: '.jp-duration',
+			  title: '.jp-title',
+			  gui: '.jp-gui',
+			  remainingDuration: true,
+        	  toggleDuration: true
+			 },
+			 errorAlerts: false,
+			 warningAlerts: false,
+		   ready: function () {
+		    angular.element(this).jPlayer("setMedia", {
+		     mp3: url,
+		    });
+		   },
+		   supplied: "mp3"
+		  });
+	} 
 });
 
 app.controller("userController", function($scope, $window, $location){
 	
-	$scope.username;
-	$scope.password;
+	$scope.username = "newsic";
+	$scope.password = "newsic";
 	var url = "api/login?username={0}&password={1}&next={2}";
 	
 	function getParameterByName(name) {
@@ -71,6 +121,9 @@ app.controller("userController", function($scope, $window, $location){
 	
 	$scope.login = function(){
 		var redirectToUrl = getParameterByName("next");
+		if(redirectToUrl === "")
+			redirectToUrl = "/profile";
+			
 		$window.location.href = url.replace("{0}", $scope.username).replace("{1}", $scope.password).replace("{2}", redirectToUrl);
 	};
 });
