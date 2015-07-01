@@ -101,7 +101,6 @@ USE_TZ = True
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "newsic", "static"),
 )
-print(STATICFILES_DIRS)
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
