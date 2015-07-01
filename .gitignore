@@ -1,0 +1,12 @@
+bin/
+eggs/
+*~
+.installed.cfg
+.coverage
+newzbuzz.egg-info/
+develop-eggs/
+__pycache__/
+node_modules/
+*#*#
+.#*
+.idea
