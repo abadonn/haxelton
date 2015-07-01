@@ -1,3 +1,8 @@
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'newsic.settings'
+import django
+django.setup()
+
 from newsic.news.models import Publisher, Topic
 Publisher.objects.all().delete()
 Topic.objects.all().delete()
