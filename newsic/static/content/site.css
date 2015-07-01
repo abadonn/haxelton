@@ -85,14 +85,15 @@ input[type="checkbox"].input-validation-error {
 }
 
 #categoryForm .item {
-  height:700px;
+  height:650px;
 }
 
-#categoryForm .item .content-box {
+#categoryForm .item .content-box, .content-box {
   color: white;
   background-color:black;
   opacity: 0.8;
   font-size: 1.4em;
+  padding:10px;
 }
 
 .btn-warning {
@@ -103,7 +104,7 @@ input[type="checkbox"].input-validation-error {
 }
 
 .carousel-caption {
-  padding-top:50%;
+  padding-top:20%;
 }
 
 .carousel-caption.summary {
@@ -114,6 +115,14 @@ input[type="checkbox"].input-validation-error {
 
 .carousel-caption > footer {
   margin-top:100px;
+}
+
+.carousel-caption > footer > div {
+  display: inline-block;
+}
+
+.carousel-caption > footer > div > .btn {
+  margin-top:20px;
 }
 
 .carousel-caption > footer > .gutter {
@@ -138,8 +147,14 @@ input[type="checkbox"].input-validation-error {
 }
 
 .jp-progress {
+  margin-top:20px;
   height: 10px;
 }
+
+.jp-seek-bar {
+  background-color: black;
+}
+
 .jp-seek-bar, .jp-play-bar{
   height: 100%;
 }
@@ -165,7 +180,7 @@ input[type="checkbox"].input-validation-error {
   text-decoration: none;
 }
 
-.logo-big {
+.logo-big, .logo-small {
  margin-top:20px;
  float:right; 
 }

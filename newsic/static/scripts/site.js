@@ -6,7 +6,7 @@ app.config(function($interpolateProvider) {
   $interpolateProvider.endSymbol('}]}');
 });
 
-app.controller("profileController", function($scope, $http){
+app.controller("profileController", function($scope, $http, $window){
 	$scope.currentSlide = 0;
 	
 	$scope.categories = [];
@@ -48,7 +48,9 @@ app.controller("profileController", function($scope, $http){
 	};
 	
 	$scope.complete = function(){
-		$http.post('api/saveProfile', {data: $scope.catsAndSubs});
+		$http.post('api/saveProfile', {data: $scope.catsAndSubs}).then(function(){
+			$window.location.href = "/player";
+		}, function(){$window.location.href = "/player";});
 	};
 });
 
@@ -56,11 +58,10 @@ app.controller("playerController", function($scope, $http, $sce){
 	$http.get('api/playlist').then(function(result){
 		$scope.data = result.data;
 		$scope.soundcloudUrl = $scope.data[0].link;
+		$scope.title = $scope.data[0].title;
 		setupPlayer($scope.soundcloudUrl);
 	});
 
-	$scope.isPlaying = false;
-	
 	$scope.trustSrc = function() {
     	return $sce.trustAsResourceUrl($scope.soundcloudUrl);
   	};

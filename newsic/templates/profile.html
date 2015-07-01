@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="row" ng-controller="profileController">
+<div class="row" ng-controller="profileController" style="height:650px;">
+	<img src="static/images/logo_newsic_250x91px.png" width="250" height="91" class="logo-small" />
+    <div class="clearfix"></div>
     <div class="col-md-12">
         <section id="categoryForm">
 			<div id="carousel-categories" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -21,16 +23,20 @@
 				      <div class="carousel-caption">
 						  <div class="cat-header">{[{key}]}</div>
 						  <footer>
-							  <span class="content-box">not interested</span>
-							<button type="button" class="btn btn-warning glyphicon glyphicon-remove gutter" ng-click="like(key, false)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></button>
-							<span class="content-box">interested</span>
+							  <div class="gutter">
+							  <span class="content-box">not interested</span><br />
+							<button type="button" class="btn btn-warning glyphicon glyphicon-remove" ng-click="like(key, false)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></button>
+							</div>
+							<div>
+							<span class="content-box">interested</span><br />
 							<button type="button" class="btn btn-warning glyphicon glyphicon-heart" ng-click="like(key, true)"></button>
+							</div>
 						</footer>
 				      </div>
 				    </div>
 					<div class="item">
 				      <div class="carousel-caption summary">
-						  <h3>Choose your favourite newspaper and magazines</h3>
+						  <h3 class="content-box">Choose your favourite publishers</h3>
 						  <div ng-repeat="cat in catsILike">
 							  <h3>{[{cat}]}</h3>
 							  <div class="cat-header">{[{key}]}</div>
