@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="hidden" name="next" value="/" />
-                        <button type="button" class="btn btn-default" ng-click="login()">Log In</button>
+                        <button type="button" class="btn btn-default" style="width:120px;" ng-click="login()">Log In</button>
                     </div>
                 </div>
                 {% if form.errors %}
@@ -35,8 +35,10 @@
         <div class="col-md-12">
               <p class="fancy"><span>OR</span></p>
             <section id="socialLoginForm" style="margin-top:50px;">
-                <button class="btn btn-default">Facebook</button>
-                <button class="btn btn-default">Google</button>
+                <div class="col-md-8 col-md-push-2" style="padding-left:0;">
+                <button class="btn btn-default" style="width:120px;">Facebook</button><br /><br />
+                <button class="btn btn-default" style="width:120px;">Google</button>
+                </div>
             </section>
         </div>
     </div>

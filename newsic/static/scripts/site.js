@@ -108,8 +108,8 @@ app.controller("playerController", function($scope, $http, $sce){
 
 app.controller("userController", function($scope, $window, $location){
 	
-	$scope.username;
-	$scope.password;
+	$scope.username = "newsic";
+	$scope.password = "newsic";
 	var url = "api/login?username={0}&password={1}&next={2}";
 	
 	function getParameterByName(name) {
