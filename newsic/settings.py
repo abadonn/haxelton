@@ -64,7 +64,7 @@ TEMPLATE_DIRS = (
     # or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, "newsic/templates"),
+    os.path.join(BASE_DIR, "newsic", "templates"),
 )
 
 WSGI_APPLICATION = 'newsic.wsgi.application'
