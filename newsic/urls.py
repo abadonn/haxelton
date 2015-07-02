@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^api/login', LogMeIn.as_view()),
     url(r'^api/logout', LogMeOut.as_view()),
     url(r'^api/playlist', GetMyPlaylist.as_view()),
+    url(r'^api/saveProfile$', Profile.as_view()),
     url(r'^login$', Login.as_view()),
     url(r'^logout$', LogMeOut.as_view()),
     url(r'^register$', Register.as_view()),

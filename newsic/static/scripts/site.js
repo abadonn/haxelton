@@ -8,20 +8,20 @@ app.config(function($interpolateProvider) {
 
 app.controller("profileController", function($scope, $http, $window){
 	$scope.currentSlide = 0;
-	
+
 	$scope.categories = [];
 	$scope.catsILike = [];
 	$scope.catsAndSubs = {};
-	
+
 	$http.get('api/topiclist').then(function(data){
 		$scope.categories = data.data;
 	});
-	
+
 	$scope.next = function(){
 		$scope.currentSlide++;
 		angular.element('#carousel-categories').carousel('next');
 	};
-	
+
 	$scope.like = function(key, likeIt){
 		if(likeIt){
 			$scope.catsILike.push(key);
@@ -32,9 +32,9 @@ app.controller("profileController", function($scope, $http, $window){
 		if($scope.currentSlide <= Object.keys($scope.categories).length)
 			$scope.next();
 	};
-	
+
 	$scope.select = function(cat, sub){
-		
+
 		if($scope.catsAndSubs[cat] !== undefined){
 			if($scope.catsAndSubs[cat].indexOf(sub) != -1)
 				$scope.catsAndSubs[cat].pop(sub);
@@ -46,7 +46,7 @@ app.controller("profileController", function($scope, $http, $window){
 			$scope.catsAndSubs[cat].push(sub);
 		}
 	};
-	
+
 	$scope.complete = function(){
 		$http.post('api/saveProfile', {data: $scope.catsAndSubs}).then(function(){
 			$window.location.href = "/player";
@@ -65,7 +65,7 @@ app.controller("playerController", function($scope, $http, $sce){
 	$scope.trustSrc = function() {
     	return $sce.trustAsResourceUrl($scope.soundcloudUrl);
   	};
-	  
+
 	function setupPlayer(url){
 		angular.element("#jquery_jplayer_1").jPlayer({
 			volume: 0.8,
@@ -103,27 +103,27 @@ app.controller("playerController", function($scope, $http, $sce){
 		   },
 		   supplied: "mp3"
 		  });
-	} 
+	}
 });
 
 app.controller("userController", function($scope, $window, $location){
-	
+
 	$scope.username = "newsic";
 	$scope.password = "newsic";
 	var url = "api/login?username={0}&password={1}&next={2}";
-	
+
 	function getParameterByName(name) {
     	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         	results = regex.exec(location.search);
     	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
-	
+
 	$scope.login = function(){
 		var redirectToUrl = getParameterByName("next");
 		if(redirectToUrl === "")
 			redirectToUrl = "/profile";
-			
+
 		$window.location.href = url.replace("{0}", $scope.username).replace("{1}", $scope.password).replace("{2}", redirectToUrl);
 	};
 });

@@ -4,7 +4,7 @@ import json
 from django.views.generic import View
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from ..accounts.models import UserPreference
 
 import soundcloud
@@ -13,6 +13,8 @@ import soundcloud
 
 @login_required(login_url='/login')
 def player(request):
+    if UserPreference.objects.filter(user__id=request.user.id).count() == 0:
+        return HttpResponseRedirect("/profile")
     return render_to_response('player.html', {})
 
 

@@ -12,6 +12,9 @@ UserPreference.objects.all().delete()
 User.objects.all().delete()
 
 
+user = User.objects.create_user('newser', 'newser@whateverthismightbe.com', 'newser')
+
+
 user = User.objects.create_user('newsic', 'newsic@whateverthismightbe.com', 'newsic')
 preference = UserPreference(topic="Politic", publisher="Bild", user=user)
 preference.save()

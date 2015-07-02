@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from .models import UserPreference
 
 
 class Login(View):
@@ -17,7 +18,8 @@ class LogMeIn(View):
         if response:
             login(request, user)
             return HttpResponseRedirect(request.GET.get("next", "/"))
-        return HttpResponse(json.dumps(response), content_type="application/json")
+        return HttpResponseRedirect( "/login?error=invalid")
+
 
 class LogMeOut(View):
     def get(self, request):
@@ -32,3 +34,13 @@ class Register(View):
 class Profile(View):
     def get(self, request):
         return render_to_response('profile.html', {})
+
+    def post(self, request):
+        print(request.body)
+        data = json.loads(request.body.decode('utf-8'))
+        for topic, publishers in data["data"].items():
+            for publisher in publishers:
+                preference = UserPreference(topic=topic, publisher=publishers, user=request.user)
+                preference.save()
+
+        return HttpResponse("ok", content_type="application/json")
